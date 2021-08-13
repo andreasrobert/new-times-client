@@ -6,6 +6,7 @@ import Page from '../components/page';
 import { useState } from 'react';
 import Crypto from '../components/crypto';
 import Nyt from '../components/nyt'
+import Guardian from '../components/guardian'
 
 export default function Home() {
 
@@ -38,12 +39,13 @@ export default function Home() {
    <Flex flexDir="column" alignItems="center" mt="44px" ml="30px">
    <Crypto></Crypto>
    <Nyt></Nyt>
+   <Guardian></Guardian>
    </Flex>
    </Flex>
 
-    <Box w="200px" h="200px" bg="blue" onClick={()=>getNews("disney")}></Box>
+    <Box w="200px" h="200px" bg="blue" onClick={()=>getNews("movie")}></Box>
 
-    <Box w="200px" h="200px" bg="green" onClick={()=>getHeadLines("disney")}></Box>
+    <Box w="200px" h="200px" bg="green" onClick={()=>getHeadLines("movie")}></Box>
 
    </Container>
   )

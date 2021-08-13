@@ -20,7 +20,7 @@ const H2 = styled.h2`
 
 function Page(props:{news:any}) {
   // console.log(props.news.description.length + "  " + [props.news.title])
-  console.log(props.news)
+  console.log(props.news.url)
 
   const [size, setSize]= useState(1)
   // let postSize = 0
@@ -50,9 +50,13 @@ function Page(props:{news:any}) {
   return (
     <>
       <Flex h="100%" flexDir="column" w="550px" mt="30px"  d={size === 2 ? "none" : "flex"}>
-        <Heading size="H4">
+        <Link href={props.news.url} passHref>
+          <a>
+        <Heading cursor="pointer" size="H4">
         {props.news.title} 
         </Heading>
+        </a>
+        </Link>
         <Box px="45px" py="18px">
         <Image border="1px solid black" src={props.news.image}  filter="grayscale(100%)" alt=""></Image>
         </Box>
@@ -83,9 +87,13 @@ function Page(props:{news:any}) {
 
 
       <Flex h="100%" flexDir="column" w="550px" mt="30px" d={size === 1 ? "none" : "flex"}>
-        <Heading size="H4">
+      <Link href={props.news.url} passHref>
+        <a>
+        <Heading cursor="pointer" size="H4">
         {props.news.title} 
         </Heading>
+        </a>
+        </Link>
         <Box  pt="18px"  float="right">
 
         </Box>

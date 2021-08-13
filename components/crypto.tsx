@@ -47,7 +47,7 @@ function Crypto() {
      return (
       <Flex mt="15px" key={data.id} justifyContent="space-between" alignItems="center">
         <Flex alignItems="center">
-        <Image src={data.image} alt="" w="30px" mr="15px"></Image>
+        <Image filter="grayscale(100%)" src={data.image} alt="" w="30px" mr="15px"></Image>
         <Heading size="H7">{data.symbol.toUpperCase()}</Heading>
         </Flex>
         <Flex alignItems="center" justifyContent="flex-end">
