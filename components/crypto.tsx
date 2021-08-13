@@ -18,12 +18,18 @@ const H2 = styled.h2`
 `;
 
 
-function Page() {
-  
+function Crypto() {
+    const [data,setData] = useState([])
 
-  
+  // console.log(data)
   useEffect(() => {
-  
+      const getCrypto = async() => {
+        const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h%2C7d`)
+        const result = await res.json();
+        setData(result);
+      }
+      getCrypto();
+
   }, [])
 
 
@@ -32,8 +38,30 @@ function Page() {
      
 
 
-<Flex flexDirection="column" w="190px" h="500px" border="1px solid black" boxShadow=" white 0px 0px 0px 2px,black 0px 0px 0px 4px;">
+<Flex flexDirection="column" w="190px" h="500px" p="5px" border="1px solid black" boxShadow=" white 0px 0px 0px 2px,black 0px 0px 0px 4px;">
+<Flex justifyContent="flex-end">
+  <Heading size="H7"mr="25px">24h</Heading>
+  <Heading size="H7" mr="7px">7d</Heading>
+</Flex>
+{ data.map((data:any)=>{
+     return (
+      <Flex mt="15px" key={data.id} justifyContent="space-between" alignItems="center">
+        <Flex alignItems="center">
+        <Image src={data.image} alt="" w="30px" mr="15px"></Image>
+        <Heading size="H7">{data.symbol.toUpperCase()}</Heading>
+        </Flex>
+        <Flex alignItems="center" justifyContent="flex-end">
+        <Heading size="H7">{`${data.price_change_percentage_24h.toFixed(1)}%`}</Heading>
+        <Flex w="47px" justifyContent="flex-end">
+        <Heading size="H7">{`${data.price_change_percentage_7d_in_currency.toFixed(1)}%`}</Heading>
+        </Flex>
+        </Flex>
 
+
+      </Flex>
+
+     )
+   })}
 
 </Flex>
 
@@ -44,7 +72,7 @@ function Page() {
   );
 }
 
-export default Page;
+export default Crypto;
 
 
 

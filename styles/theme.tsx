@@ -60,6 +60,14 @@ export const theme = extendTheme({
           fontWeight: "400"
         },
 
+        H8: {
+          fontFamily: "Playfair Display",
+          fontSize: {base:"17px"}, 
+          fontWeight: "700",
+
+        },
+
+
       },
     },
 
