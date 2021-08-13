@@ -1,6 +1,6 @@
-import { Flex, Heading, Text, GridItem, Grid, Box } from "@chakra-ui/react";
-import Image from "next/image";
+import { Flex, Heading, Text, GridItem, Grid, Box, Image, NumberIncrementStepper } from "@chakra-ui/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const H1 = styled.h1`
@@ -17,70 +17,114 @@ const H2 = styled.h2`
   font-size: 20px;
 `;
 
-function Page() {
+
+function Page(props:{news:any}) {
+  // console.log(props.news.description.length + "  " + [props.news.title])
+  console.log(props.news)
+
+  const [size, setSize]= useState(1)
+  // let postSize = 0
+
+  // if (size < 350) postSize = 3
+  // if (size < 250) postSize = 2
+  // if (size < 50) postSize = 1
+
+  //  {props.news.title} 
+  //  {props.news.description} 
+  //  {props.news.url} 
+  //  {props.news.image} 
+  //  {props.news.publishedAt} 
+   
+  const options = { year: "numeric", month: "long", day: "numeric" }
+  const newsDate = new Date(props.news.publishedAt).toLocaleDateString(undefined,{year:"numeric", month:"long", day:"numeric"})
+
+  
+  useEffect(() => {
+    if(props.news.description.length < 150){
+      setSize(2)
+    }
+  
+  }, [props.news.description.length])
+
+
   return (
     <>
-      <Flex h="100%" flexDir="column" w="70vw">
-        <Heading size="H2">
-          Woman spends to much time on Codepens despite advice; no plans to stop
+      <Flex h="100%" flexDir="column" w="550px" mt="30px"  d={size === 2 ? "none" : "flex"}>
+        <Heading size="H4">
+        {props.news.title} 
         </Heading>
+        <Box px="45px" py="18px">
+        <Image border="1px solid black" src={props.news.image}  filter="grayscale(100%)" alt=""></Image>
+        </Box>
+        <Heading size="H7" mt="7px">{newsDate.replace(',','th,')}</Heading>
+
+
         <Box 
         my="20px"
-        w="50%"
+        w="550px"
         textAlign="justify"
         sx={{
             columnCount: { base: "1", ts: "2"},
             columnGap: "30px",   
         }}
         >
+
         <Text  size="p">
-        Sometimes, Internet users land themselves in an uncommon situation where an app or website can be used for both work and personal situations. Well, a young front-end designer was spending up to 13 hours on the site, Codepen for work and her hobby, which unfortunately, is also coding.
-          time.
+        {props.news.description} 
         </Text>
-        <Text mt="20px" size="p">
-        The designer, whose work includes a To-Do Terrarium, clarified, Well, I didnt have to use it for work but it was already part of my workflow. It just made sense as it was more efficient. The biggest issue, she said, is that she would hop on Codepen for work, but would get distracted by pens made by others in the community for unexpectedly long periods of time, which then causes her to spend even more time on the site.
-        </Text>
-        <Text mt="20px" size="p">
-        I mean, thats terrible right? she asked. Codepen, which brands itself as the best place to build, test, and discover front-end code, has declined to comment at this time.
-        </Text>
+        <Flex justifyContent="flex-end" pt="15px" alignItems="center">
+        <Heading size="H7" mr="10px">{props.news.source.name}</Heading>
+
+        <Image alignSelf="flex-end"  src={`https://logo.clearbit.com/${props.news.source.url.replace('https://','').replace('www.','')}?size=35&greyscale=true`} border="1px solid black" borderRadius="50%" filter="grayscale(100%)" alt=""></Image>
+        </Flex>
         </Box>
       </Flex>
 
 
 
-      <Grid
-  h="200px"
-  w="70vw"
-  templateRows="repeat(2, 1fr)"
-  gap={4} 
-  mb="200px"
->
-  <Heading size="H2" w="150">
-          Woman spends to much time on Codepens despite advice; no plans to stop
+      <Flex h="100%" flexDir="column" w="550px" mt="30px" d={size === 1 ? "none" : "flex"}>
+        <Heading size="H4">
+        {props.news.title} 
         </Heading>
-  <GridItem border="1px solid black">
-  <Box 
-        my="20px"
-        w="50%"
-        sx={{
-            columnCount: { base: "1", ts: "2"},
-            columnGap: "30px",   
-        }}
-        textAlign="justify"
-        >
-        <Text  size="p">
-        Sometimes, Internet users land themselves in an uncommon situation where an app or website can be used for both work and personal situations. Well, a young front-end designer was spending up to 13 hours on the site, Codepen for work and her hobby, which unfortunately, is also coding.
-          time.
-        </Text>
-        <Text mt="5px" size="p">
-        The designer, whose work includes a To-Do Terrarium, clarified, Well, I didnt have to use it for work but it was already part of my workflow. It just made sense as it was more efficient. The biggest issue, she said, is that she would hop on Codepen for work, but would get distracted by pens made by others in the community for unexpectedly long periods of time, which then causes her to spend even more time on the site.
-        </Text>
-        <Text mt="5px" size="p">
-        I mean, thats terrible right? she asked. Codepen, which brands itself as the best place to build, test, and discover front-end code, has declined to comment at this time.
-        </Text>
+        <Box  pt="18px"  float="right">
+
         </Box>
-  </GridItem>
-</Grid>
+        <Box 
+        mb="20px"
+        w="550px"
+        textAlign="justify"
+        // sx={{
+        //     columnCount: { base: "1", ts: "2"},
+        //     columnGap: "30px",   
+        // }}
+        >
+                  <Image border="1px solid black" float="right" w="48%" ml="28px" src={props.news.image}  filter="grayscale(100%)" alt=""></Image>
+                  <Flex mt="-11px" mb="14px" alignItems="center" justifyContent="space-between" >
+                  <Heading size="H7" mt="7px">{newsDate.replace(',','th,')}</Heading>
+
+                  </Flex>
+        <Text  size="p">
+        {props.news.description} 
+        </Text>
+        <Flex justifyContent="flex-end" pt="15px" alignItems="center">
+        <Heading size="H7" mr="10px">{props.news.source.name}</Heading>
+        <Image alignSelf="flex-end"  src={`https://logo.clearbit.com/${props.news.source.url.replace('https://','').replace('www.','')}?size=35&greyscale=true`} border="1px solid black" borderRadius="50%" filter="grayscale(100%)" alt=""></Image>
+        </Flex>
+        
+        
+       
+        </Box>
+        
+      </Flex>
+
+
+{/* <Flex flexDirection="column" w="190px" h="500px" border="1px solid black" boxShadow=" white 0px 0px 0px 2px,black 0px 0px 0px 4px;">
+<Image  src={`https://logo.clearbit.com/${props.news.source.url.replace('https://','').replace('www.','')}?size=300&greyscale=true`} borderBottom="1px solid black" filter="grayscale(100%)" alt=""></Image>
+
+pp
+
+</Flex> */}
+
 
 
 
@@ -89,3 +133,58 @@ function Page() {
 }
 
 export default Page;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <Grid
+// h="200px"
+// w="550px"
+// templateRows="repeat(2, 1fr)"
+// templateColumns="550px 1fr"
+// gap={4} 
+// mb="900px"
+// >
+// {/* <Heading size="H2" w="150">
+//         Woman spends to much time on Codepens despite advice; no plans to stop
+//       </Heading> */}
+
+// <GridItem colSpan={2} >
+// <Heading size="H4">
+// Amid Black Widow lawsuit, Disney boss defends its pandemic release strategy  </Heading>
+// </GridItem>  
+
+
+// <GridItem>
+// <Box 
+//       my="20px"
+//       // w="50%"
+//       // sx={{
+//       //     columnCount: { base: "1", ts: "2"},
+//       //     columnGap: "30px",   
+//       // }}
+//       textAlign="justify"
+//       >
+//       <Text  size="p">
+//       Following a high-stakes lawsuit over Disney’s day-and-date release of Marvel’s Black Widow on its Premier Access streaming platform and the company’s compensation of the film’s star Scarlett Johansson, Bob Chapek defended both the company’s payouts to talent as well as its decisions around its various pandemic movie releases.
+      
+//       </Text>
+    
+//       </Box>
+// </GridItem>
+
+// <GridItem>
+// <Image src="https://image.cnbcfm.com/api/v1/image/106410802-1582723392778bob.jpg?v=1613080332" filter="grayscale(100%)" alt=""></Image>
+
+// </GridItem>
+// </Grid>

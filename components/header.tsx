@@ -28,7 +28,8 @@ function Test() {
       <Flex h="60px"  borderY="2px solid black" py="3px" >
       <Flex h="100%" w="100%"  borderY="1px solid black" justifyContent="space-around" alignItems="center">
           <Heading size="H5">ISSUE #1</Heading>
-          <Heading size="H5">TUESDAY, 24 MAY, 2020</Heading>
+          {/* <Heading size="H5">TUESDAY, 24 MAY, 2020</Heading> */}
+          <Heading size="H5">{new Date().toLocaleDateString(undefined,{weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}).toUpperCase()}</Heading>
           <Heading size="H5">TWO MEMES EDITION</Heading>
 
       </Flex>

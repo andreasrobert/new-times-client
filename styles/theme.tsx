@@ -21,7 +21,9 @@ export const theme = extendTheme({
       baseStyle: {
         fontFamily: "Playfair Display SC", //EB Garamond 4-8, Playfair Display 4-9, Manrope 2-8
         fontWeight: "900",
-        color:"black"
+        color:"black",
+        fontStyle: "normal",
+
       },
       sizes: {
         
@@ -40,19 +42,21 @@ export const theme = extendTheme({
         H3: {
           fontFamily: "Playfair Display",
           fontSize: {base:"20px"},
-          fontStyle: "italic",
         },
 
         H4: {
           fontFamily: "Playfair Display",
-          fontSize: {base:"20px"},
-          lineHeight: "29px",
-          letterSpacing: "2px",
+          fontSize: {base:"24px"},  
         },
 
         H5: {
           fontFamily: "EB Garamond",
           fontSize: "20px",
+          fontWeight: "400"
+        },
+        H7: {
+          fontFamily: "EB Garamond",
+          fontSize: "15px",
           fontWeight: "400"
         },
 
