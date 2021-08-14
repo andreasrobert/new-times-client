@@ -50,7 +50,7 @@ function Page(props:{news:any}) {
   return (
     <>
       <Flex h="100%" flexDir="column" w={{base:"90%",mb:"550px"}} mt="30px"  d={{base:"flex",mb:size === 2 ? "none" : "flex"}}>
-        <Link href={props.news.url} passHref>
+        <Link href={props.news.url || ''} passHref>
           <a>
         <Heading cursor="pointer" size="H4">
         {props.news.title} 
@@ -87,7 +87,7 @@ function Page(props:{news:any}) {
 
 
       <Flex h="100%" flexDir="column" w={{base:"90%",mb:"550px"}} mt="30px" d={{base:"none",mb:size === 1 ? "none" : "flex"}}>
-      <Link href={props.news.url} passHref>
+      <Link href={props.news.url || ''} passHref>
         <a>
         <Heading cursor="pointer" size="H4">
         {props.news.title} 

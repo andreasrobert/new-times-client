@@ -3,10 +3,11 @@ import styles from '../styles/Home.module.css';
 import Header from '../components/header';
 import { Container, Box, Flex } from "@chakra-ui/react";
 import Page from '../components/page';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Crypto from '../components/crypto';
-import Nyt from '../components/nyt'
-import Guardian from '../components/guardian'
+import Nyt from '../components/nyt';
+import Guardian from '../components/guardian';
+import Footer from '../components/footer';
 
 export default function Home() {
 
@@ -15,15 +16,15 @@ export default function Home() {
   const [search, setSearch] = useState("SEARCH")
   const [searching, setSearching] = useState(false)
 
-  const handleSubmit = (event:any)=> {
+  const handleSubmit =  (value:string) => (event:FormEvent) => {
     event.preventDefault();
-    // setSearch(input)
-    // getNews()
+    setSearch(value)
+    getNews(value)
     setSearching(true)
   }
 
   const getNews = async (search:string) =>{
-    setSearching(false)
+    setSearching(true)
     const res = await fetch(`https://gnews.io/api/v4/search?q=${search}&lang=en&country=us&token=7cecdcfe48e63c0905b8913ff5a83367`);
     const result = await res.json();
     setData(result.articles)
@@ -37,18 +38,22 @@ export default function Home() {
   } 
 
   useEffect(() => {
-    // getHeadLines("");
-  }, [search])
+    if(searching){
+      // getNews(search)
+    }else{
+    getHeadLines("");
+    }
+  }, [search,searching])
 
   return (
    <Container minW="100%" pos="absolute" px={{mb:"40px"}} >
 
-   <Header handleSubmit={(event:any)=>handleSubmit(event)} search={search}></Header>
+   <Header handleSubmit={handleSubmit} search={search}></Header>
    <Flex flexDir={{base:"column",tb:"row"}} justifyContent="center">
    <Flex flexDir="column" alignItems="center" mt="40px" pr={{tb:"30px"}} borderRight={{tb:"1px solid black"}} >
   <Flex flexDir="column" alignItems="center" justifyContent="center"  mt="-40px" >
    { data.map((news:any)=>{
-     return <Page key={news.title} news={news}></Page>
+     return <Page key={news.url} news={news}></Page>
    })}
    </Flex>
    </Flex>
@@ -58,9 +63,10 @@ export default function Home() {
    <Guardian searching={searching} search={search}></Guardian>
    </Flex>
    </Flex>
+   <Footer></Footer>
 
-    <Box w="200px" h="200px" bg="blue" onClick={()=>getNews(search)}></Box>
-    <Box w="200px" h="200px" bg="green" onClick={()=>getHeadLines(search)}></Box>
+    {/* <Box w="200px" h="200px" bg="blue" onClick={()=>getNews(search)}></Box>
+    <Box w="200px" h="200px" bg="green" onClick={()=>getHeadLines(search)}></Box> */}
 
    </Container>
   )
