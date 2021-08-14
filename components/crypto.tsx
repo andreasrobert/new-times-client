@@ -50,8 +50,8 @@ function Crypto() {
 </Flex>
 { data.map((data:any)=>{
      return (
-       <>
-      <Flex d={{base:"none",tb:"flex"}} mt="15px" key={data.id} justifyContent="space-between" alignItems="center">
+       <Box key={data.id}>
+      <Flex d={{base:"none",tb:"flex"}} mt="15px" justifyContent="space-between" alignItems="center">
         <Flex alignItems="center">
         <Image filter="grayscale(100%)" src={data.image} alt="" w="30px" mr="12px"></Image>
         <Heading size="H7">{data.symbol.toUpperCase()}</Heading>
@@ -72,7 +72,7 @@ function Crypto() {
 
       </Flex>
 
-      <Flex d={{base:"flex",tb:"none"}} mt="15px" key={data.id} justifyContent="space-between" alignItems="center">
+      <Flex d={{base:"flex",tb:"none"}} mt="15px" justifyContent="space-between" alignItems="center">
         <Image filter="grayscale(100%)" src={data.image} alt="" w="30px" mr="12px"></Image>
         <Heading size="H7">{data.symbol.toUpperCase()}</Heading>
         
@@ -89,7 +89,7 @@ function Crypto() {
 
 
 
-      </>
+      </Box>
      )
    })}
 

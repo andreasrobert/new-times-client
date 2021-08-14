@@ -56,7 +56,6 @@ function Nyt(props:{searching:boolean;search:string}) {
     
     
     { data.map((data:any)=>{
-      console.log(home? `${data.id}` : `${data._id}`)
      return (
         <Flex key={home? data.id : data._id} py={{base:"25px",tb:"0px"}} justifyContent="center" border={{base:"1px solid black",tb:"0px"}} borderTop={{tb:"1px solid black"}} mt="30px" w={{base:"100%",ms:"200px",tb:"190px"}} px={{base:"25px",tb:"10px"}}>
             <Link href={home? data.url  || '' : data.web_url  || ''} passHref>

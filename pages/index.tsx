@@ -49,7 +49,7 @@ export default function Home() {
    <Container minW="100%" pos="absolute" px={{mb:"40px"}} >
 
 <Head>
-        <title>Robert Pitoy</title>
+        <title>The Olden Times</title>
         <meta name="title" property="og:title" content="The Olden Times" />
         <meta property="og:type" content="Website" />
         <meta
