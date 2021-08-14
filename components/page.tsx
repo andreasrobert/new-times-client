@@ -20,7 +20,7 @@ const H2 = styled.h2`
 
 function Page(props:{news:any}) {
   // console.log(props.news.description.length + "  " + [props.news.title])
-  console.log(props.news.url)
+  // console.log(props.news.url)
 
   const [size, setSize]= useState(1)
   // let postSize = 0

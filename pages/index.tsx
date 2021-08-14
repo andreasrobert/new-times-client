@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css';
 import Header from '../components/header';
 import { Container, Box, Flex } from "@chakra-ui/react";
 import Page from '../components/page';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Crypto from '../components/crypto';
 import Nyt from '../components/nyt'
 import Guardian from '../components/guardian'
@@ -12,22 +12,37 @@ export default function Home() {
 
   const [data,setData] = useState([])
 
+  const [search, setSearch] = useState("indonesia")
+  const [searching, setSearching] = useState(false)
+
+  const handleSubmit = (event:any)=> {
+    event.preventDefault();
+    // setSearch(input)
+    setSearching(true)
+  }
+
   const getNews = async (search:string) =>{
+    setSearching(false)
     const res = await fetch(`https://gnews.io/api/v4/search?q=${search}&lang=en&country=us&token=7cecdcfe48e63c0905b8913ff5a83367`);
     const result = await res.json();
     setData(result.articles)
   } 
 
   const getHeadLines = async (search:string) =>{
-    const res = await fetch(`https://gnews.io/api/v4/top-headlines?country=us&lang=en&token=7cecdcfe48e63c0905b8913ff5a83367`);
+    setSearching(false)
+    const res = await fetch(`https://gnews.io/api/v4/top-headlines?q=${search}&country=us&lang=en&token=7cecdcfe48e63c0905b8913ff5a83367`);
     const result = await res.json();
     setData(result.articles)
   } 
 
+  useEffect(() => {
+    // getHeadLines("");
+  }, [search])
+
   return (
    <Container minW="100%" pos="absolute" px="40px" >
 
-   <Header></Header>
+   <Header handleSubmit={(event:any)=>handleSubmit(event)}></Header>
    <Flex justifyContent="center">
    <Flex flexDir="column" alignItems="center" mt="40px" pr="30px" borderRight="1px solid black" >
   <Flex flexDir="column" alignItems="center" mt="-40px" >
@@ -38,14 +53,13 @@ export default function Home() {
    </Flex>
    <Flex flexDir="column" alignItems="center" mt="44px" ml="30px">
    <Crypto></Crypto>
-   <Nyt></Nyt>
-   <Guardian></Guardian>
+   <Nyt searching={searching} search={search}></Nyt>
+   <Guardian searching={searching} search={search}></Guardian>
    </Flex>
    </Flex>
 
-    <Box w="200px" h="200px" bg="blue" onClick={()=>getNews("movie")}></Box>
-
-    <Box w="200px" h="200px" bg="green" onClick={()=>getHeadLines("movie")}></Box>
+    <Box w="200px" h="200px" bg="blue" onClick={()=>getNews(search)}></Box>
+    <Box w="200px" h="200px" bg="green" onClick={()=>getHeadLines(search)}></Box>
 
    </Container>
   )

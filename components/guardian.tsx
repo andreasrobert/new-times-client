@@ -18,19 +18,34 @@ const H2 = styled.h2`
 `;
 
 
-function Guardian() {
+function Guardian(props:{searching:boolean;search:string}) {
     const [data,setData] = useState([])
+    const [home, setHome] =useState(true)
+
 
   console.log(data)
   useEffect(() => {
-      const getNyt = async() => {
-        const res = await fetch(`https://content.guardianapis.com/search?q=movie&api-key=3196b1b1-282b-4ffd-b353-9dad8ea11375`)
+      const getGuardian = async() => {
+        const res = await fetch(`https://content.guardianapis.com/world/indonesia?api-key=3196b1b1-282b-4ffd-b353-9dad8ea11375`)
         const result = await res.json();
         setData(result.response.results);
+        setHome(true)
       }
-      getNyt();
 
-  }, [])
+      const searchGuardian = async(search:string) =>{
+        const res = await fetch(`https://content.guardianapis.com/search?q=${search}&api-key=3196b1b1-282b-4ffd-b353-9dad8ea11375`)
+        const result = await res.json();
+        setData(result.response.results);
+        setHome(false)
+      }
+
+      if(props.searching){
+        searchGuardian(props.search);
+      }else{
+        getGuardian();
+      }
+
+  }, [props.searching, props.search])
 
 
   return (
@@ -42,7 +57,11 @@ function Guardian() {
     { data.map((data:any)=>{
      return (
         <Flex key={data.id} borderTop="1px solid black" mt="30px" w="190px" px="10px">
+            <Link href={data.webUrl} passHref>
+            <a>
         <Heading cursor="pointer" size="H8" textAlign="center" mt="7px">{data.webTitle}</Heading>
+        </a>
+        </Link>
         </Flex>
         )
    })}

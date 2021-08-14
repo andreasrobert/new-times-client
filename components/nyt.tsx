@@ -18,19 +18,35 @@ const H2 = styled.h2`
 `;
 
 
-function Nyt() {
+function Nyt(props:{searching:boolean;search:string}) {
     const [data,setData] = useState([])
+    const [home, setHome] =useState(true)
 
   console.log(data)
   useEffect(() => {
       const getNyt = async() => {
+        // const res = await fetch(`https://api.nytimes.com/svc/topstories/v2/home.json?api-key=dh4O0ayB8CQgCKHI1GT6GzXIs2UW7SYe`)
         const res = await fetch(`https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=dh4O0ayB8CQgCKHI1GT6GzXIs2UW7SYe`)
         const result = await res.json();
         setData(result.results);
+        setHome(true)
       }
-      getNyt();
 
-  }, [])
+      const searchNyt = async(search:string) =>{
+        const res = await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&api-key=dh4O0ayB8CQgCKHI1GT6GzXIs2UW7SYe`)
+        const result = await res.json();
+        setData(result.response.docs)
+        setHome(false)
+      }
+
+      if(props.searching){
+        searchNyt(props.search);
+      }else{
+        getNyt();
+      }
+      
+
+  }, [props.searching, props.search])
 
 
   return (
@@ -41,8 +57,12 @@ function Nyt() {
     
     { data.map((data:any)=>{
      return (
-        <Flex key={data.id} borderTop="1px solid black" mt="30px" w="190px" px="10px">
-        <Heading cursor="pointer" size="H8" textAlign="center" mt="7px">{data.title}</Heading>
+        <Flex key={home? data.id : data._id} borderTop="1px solid black" mt="30px" w="190px" px="10px">
+            <Link href={home? data.url : data.web_url} passHref>
+            <a>
+        <Heading cursor="pointer" size="H8" textAlign="center" mt="7px">{home? data.title : data.snippet}</Heading>
+        </a>
+        </Link>
         </Flex>
         )
    })}
