@@ -30,7 +30,7 @@ function Header(props: { handleSubmit:  (value:string) => (event: FormEvent) => 
         alignItems="center"
       >
         {/* <H1>The Codepen Times</H1> */}
-        <Heading size="H1">The Mouse Times</Heading>
+        <Heading size="H1">The Olden Times</Heading>
       </Flex>
       <Flex h="60px" borderY="2px solid black" py="3px">
         <Flex
