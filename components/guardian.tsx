@@ -50,13 +50,13 @@ function Guardian(props:{searching:boolean;search:string}) {
 
   return (
     <>
-              <Heading mt="40px" mb="-20px" size="H8">THE GUARDIAN</Heading>
+              <Heading mt="40px" mb="-20px" size="H8" w={{base:"190px"}} textAlign="center" d={{base:"none",tb:"inline"}}>THE GUARDIAN</Heading>
 
     
     
     { data.map((data:any)=>{
      return (
-        <Flex key={data.id} borderTop="1px solid black" mt="30px" w="190px" px="10px">
+        <Flex key={data.id} py={{base:"25px",tb:"0px"}} border={{base:"1px solid black",tb:"0px"}} borderTop={{tb:"1px solid black"}} mt="30px" w={{mb:"200px",tb:"190px"}} px={{base:"25px",tb:"10px"}}>
             <Link href={data.webUrl} passHref>
             <a>
         <Heading cursor="pointer" size="H8" textAlign="center" mt="7px">{data.webTitle}</Heading>

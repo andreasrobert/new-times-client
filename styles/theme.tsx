@@ -4,11 +4,11 @@ import { createBreakpoints } from "@chakra-ui/theme-tools"
 const breakpoints = createBreakpoints({ 
   ms: "340px",
   mm: "410px",
-  md: "434px",
-  ts: "440px",
-  mb: "500px",
-  tm: "690px",
-  tb: "1035px",
+  md: "450px",
+  ts: "525px",
+  mb: "635px",
+  tm: "685px",
+  tb: "845px",
   sm: "1090px",   //third
   lg: "1260px",  // after 1000px or x use->[fifth] before 1440px
   xl: "1440px",  // after 1440px or x use->[sixth]
@@ -29,7 +29,7 @@ export const theme = extendTheme({
         
         H1: {
           fontFamily: "Playfair Display SC",
-          fontSize: {base:"70px",ts:"70px"},
+          fontSize: {base:"8.8vw",mb:"8vw",tb:"70px"},
           fontWeight: "900",
         },
 

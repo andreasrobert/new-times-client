@@ -12,12 +12,13 @@ export default function Home() {
 
   const [data,setData] = useState([])
 
-  const [search, setSearch] = useState("indonesia")
+  const [search, setSearch] = useState("SEARCH")
   const [searching, setSearching] = useState(false)
 
   const handleSubmit = (event:any)=> {
     event.preventDefault();
     // setSearch(input)
+    // getNews()
     setSearching(true)
   }
 
@@ -40,18 +41,18 @@ export default function Home() {
   }, [search])
 
   return (
-   <Container minW="100%" pos="absolute" px="40px" >
+   <Container minW="100%" pos="absolute" px={{mb:"40px"}} >
 
-   <Header handleSubmit={(event:any)=>handleSubmit(event)}></Header>
-   <Flex justifyContent="center">
-   <Flex flexDir="column" alignItems="center" mt="40px" pr="30px" borderRight="1px solid black" >
-  <Flex flexDir="column" alignItems="center" mt="-40px" >
+   <Header handleSubmit={(event:any)=>handleSubmit(event)} search={search}></Header>
+   <Flex flexDir={{base:"column",tb:"row"}} justifyContent="center">
+   <Flex flexDir="column" alignItems="center" mt="40px" pr={{tb:"30px"}} borderRight={{tb:"1px solid black"}} >
+  <Flex flexDir="column" alignItems="center" justifyContent="center"  mt="-40px" >
    { data.map((news:any)=>{
      return <Page key={news.title} news={news}></Page>
    })}
    </Flex>
    </Flex>
-   <Flex flexDir="column" alignItems="center" mt="44px" ml="30px">
+   <Flex flexDir={{tb:"column"}} justifyContent="space-between" alignItems="center" mt="44px" ml={{tb:"30px"}} px={{base:"15px", mb:"none"}} flexWrap="wrap">
    <Crypto></Crypto>
    <Nyt searching={searching} search={search}></Nyt>
    <Guardian searching={searching} search={search}></Guardian>

@@ -51,16 +51,16 @@ function Nyt(props:{searching:boolean;search:string}) {
 
   return (
     <>
-              <Heading mt="25px" mb="-20px" size="H8">NEW YORK TIMES</Heading>
+              <Heading mt="25px" mb="-20px" size="H8" w="190px" textAlign="center" d={{base:"none",tb:"inline"}}>NEW YORK TIMES</Heading>
 
     
     
     { data.map((data:any)=>{
      return (
-        <Flex key={home? data.id : data._id} borderTop="1px solid black" mt="30px" w="190px" px="10px">
+        <Flex key={home? data.id : data._id} py={{base:"25px",tb:"0px"}} border={{base:"1px solid black",tb:"0px"}} borderTop={{tb:"1px solid black"}} mt="30px" w={{base:"100%",md:"200px",tb:"190px"}} px={{base:"25px",tb:"10px"}}>
             <Link href={home? data.url : data.web_url} passHref>
             <a>
-        <Heading cursor="pointer" size="H8" textAlign="center" mt="7px">{home? data.title : data.snippet}</Heading>
+        <Heading cursor="pointer" size="H8" textAlign="center" mt={{tb:"7px"}}>{home? data.title : data.snippet}</Heading>
         </a>
         </Link>
         </Flex>

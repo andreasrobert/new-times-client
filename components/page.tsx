@@ -49,7 +49,7 @@ function Page(props:{news:any}) {
 
   return (
     <>
-      <Flex h="100%" flexDir="column" w="550px" mt="30px"  d={size === 2 ? "none" : "flex"}>
+      <Flex h="100%" flexDir="column" w={{base:"90%",mb:"550px"}} mt="30px"  d={{base:"flex",mb:size === 2 ? "none" : "flex"}}>
         <Link href={props.news.url} passHref>
           <a>
         <Heading cursor="pointer" size="H4">
@@ -57,7 +57,7 @@ function Page(props:{news:any}) {
         </Heading>
         </a>
         </Link>
-        <Box px="45px" py="18px">
+        <Box px={{mb:"45px"}} py="18px">
         <Image border="1px solid black" src={props.news.image}  filter="grayscale(100%)" alt=""></Image>
         </Box>
         <Heading size="H7" mt="7px">{newsDate.replace(',','th,')}</Heading>
@@ -65,10 +65,10 @@ function Page(props:{news:any}) {
 
         <Box 
         my="20px"
-        w="550px"
+        w={{base:"100%",mb:"550px"}}
         textAlign="justify"
         sx={{
-            columnCount: { base: "1", ts: "2"},
+            columnCount: { base: "1", mb: "2"},
             columnGap: "30px",   
         }}
         >
@@ -86,7 +86,7 @@ function Page(props:{news:any}) {
 
 
 
-      <Flex h="100%" flexDir="column" w="550px" mt="30px" d={size === 1 ? "none" : "flex"}>
+      <Flex h="100%" flexDir="column" w={{base:"90%",mb:"550px"}} mt="30px" d={{base:"none",mb:size === 1 ? "none" : "flex"}}>
       <Link href={props.news.url} passHref>
         <a>
         <Heading cursor="pointer" size="H4">
@@ -99,15 +99,18 @@ function Page(props:{news:any}) {
         </Box>
         <Box 
         mb="20px"
-        w="550px"
+        w={{base:"100%",mb:"550px"}}
         textAlign="justify"
+        alignItems="center"
+        justifyContent="center"
+        flexDir="column"
         // sx={{
         //     columnCount: { base: "1", ts: "2"},
         //     columnGap: "30px",   
         // }}
         >
-                  <Image border="1px solid black" float="right" w="48%" ml="28px" src={props.news.image}  filter="grayscale(100%)" alt=""></Image>
-                  <Flex mt="-11px" mb="14px" alignItems="center" justifyContent="space-between" >
+                  <Image border="1px solid black" float={{mb:"right"}} w={{base:"90%",mb:"48%"}} ml={{mb:"28px"}} src={props.news.image}  filter="grayscale(100%)" alt=""></Image>
+                  <Flex mt="-11px" mb="14px" alignItems={{mb:"center"}} justifyContent="space-between" >
                   <Heading size="H7" mt="7px">{newsDate.replace(',','th,')}</Heading>
 
                   </Flex>

@@ -40,7 +40,7 @@ function Crypto() {
      
 
 
-<Flex flexDirection="column" w="190px" h="500px" p="5px" border="1px solid black" boxShadow=" white 0px 0px 0px 2px,black 0px 0px 0px 4px;" >
+<Flex flexDirection="column" w={{base:"100%",tb:"190px"}} h="500px" p="5px" border="1px solid black" boxShadow=" white 0px 0px 0px 2px,black 0px 0px 0px 4px;" >
 <Flex justifyContent="flex-end">
   <Heading size="H7"mr="25px">24h</Heading>
   <Heading size="H7" mr="7px">7d</Heading>
@@ -58,12 +58,12 @@ function Crypto() {
         <Flex w="47px" justifyContent="flex-end">
         <Heading size="H7">{`${data.price_change_percentage_7d_in_currency.toFixed(1)}%`}</Heading>
         </Flex>
-      {/* <Flex ml="10px" w="70px" h="25px" >
-        <Sparklines data={data.sparkline_in_7d.price}  width={70} height={25}>
+      <Flex ml="10px" w="70px" h="25px" d={{base:"inline",tb:"none"}} >
+        <Sparklines data={data.sparkline_in_7d.price}  width={130} height={25}>
     <SparklinesLine color="black" style={{ fill: "none" }} />
     <SparklinesReferenceLine type="avg" />
     </Sparklines>
-    </Flex> */}
+    </Flex>
     </Flex>
 
       </Flex>
