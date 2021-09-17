@@ -9,9 +9,9 @@ const breakpoints = createBreakpoints({
   tm: "685px",
   ms: "757px",
   tb: "845px",
-  sm: "1090px",   //third
-  lg: "1260px",  // after 1000px or x use->[fifth] before 1440px
-  xl: "1440px",  // after 1440px or x use->[sixth]
+  sm: "1090px",   
+  lg: "1260px",  
+  xl: "1440px",  
 })
 
 

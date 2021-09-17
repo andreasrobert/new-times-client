@@ -1,12 +1,11 @@
 import { Flex, Heading, Input } from "@chakra-ui/react";
-import { FormEvent, useState } from "react";
-
-
+import { FormEvent, useContext, useState } from "react";
+import { SearchContext } from "../pages";
 
 function Header(props: {
   handleSubmit: (value: string) => (event: FormEvent) => void;
-  search: string;
 }) {
+  const { search } = useContext(SearchContext);
   const [value, setValue] = useState("");
 
   return (
@@ -30,7 +29,7 @@ function Header(props: {
           <Heading size="H5" d={{ base: "none", ts: "inline" }}>
             ISSUE #1
           </Heading>
-          <Heading size="H5" w={{ base: "151px", ts: "fit-content" }}>
+          <Heading size="H5" w={{ base: "190px", ts: "fit-content" }}>
             {new Date()
               .toLocaleDateString(undefined, {
                 weekday: "long",
@@ -52,7 +51,7 @@ function Header(props: {
                 border="none"
                 textTransform="uppercase"
                 fontSize="20px"
-                placeholder={`${props.search}`}
+                placeholder={`${search}`}
                 fontFamily="EB Garamond"
                 w="130px"
                 mr={{ base: "-18px", ts: "4px" }}

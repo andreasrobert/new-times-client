@@ -1,37 +1,9 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import useNewsAPI from "../hooks/useNewsAPI";
 
-function Guardian(props: { searching: boolean; search: string }) {
-  const [data, setData] = useState([]);
-  const [home, setHome] = useState(true);
-
-  // console.log(data)
-  useEffect(() => {
-    const getGuardian = async () => {
-      const res = await fetch(
-        `https://content.guardianapis.com/world/indonesia?api-key=3196b1b1-282b-4ffd-b353-9dad8ea11375`
-      );
-      const result = await res.json();
-      setData(result.response.results);
-      setHome(true);
-    };
-
-    const searchGuardian = async (search: string) => {
-      const res = await fetch(
-        `https://content.guardianapis.com/search?q=${search}&api-key=3196b1b1-282b-4ffd-b353-9dad8ea11375`
-      );
-      const result = await res.json();
-      setData(result.response.results);
-      setHome(false);
-    };
-
-    if (props.searching) {
-      searchGuardian(props.search);
-    } else {
-      getGuardian();
-    }
-  }, [props.searching, props.search]);
+function Guardian() {
+  const { data } = useNewsAPI({ source: "guardian" });
 
   return (
     <>

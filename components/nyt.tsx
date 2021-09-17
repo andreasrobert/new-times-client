@@ -1,40 +1,9 @@
-import {
-  Flex,
-  Heading,
-} from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import useNewsAPI from "../hooks/useNewsAPI";
 
-
-function Nyt(props: { searching: boolean; search: string }) {
-  const [data, setData] = useState([]);
-  const [home, setHome] = useState(true);
-
-  useEffect(() => {
-    const getNyt = async () => {
-      const res = await fetch(
-        `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=dh4O0ayB8CQgCKHI1GT6GzXIs2UW7SYe`
-      );
-      const result = await res.json();
-      setData(result.results);
-      setHome(true);
-    };
-
-    const searchNyt = async (search: string) => {
-      const res = await fetch(
-        `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&api-key=dh4O0ayB8CQgCKHI1GT6GzXIs2UW7SYe`
-      );
-      const result = await res.json();
-      setData(result.response.docs);
-      setHome(false);
-    };
-
-    if (props.searching) {
-      searchNyt(props.search);
-    } else {
-      getNyt();
-    }
-  }, [props.searching, props.search]);
+function Nyt() {
+  const { data, home } = useNewsAPI({ source: "nyt" });
 
   return (
     <>
