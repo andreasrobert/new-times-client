@@ -42,6 +42,7 @@ export default function Home() {
               alignItems="center"
               justifyContent="center"
               mt="-40px"
+              w={{ base: "90%", mb: "550px" }}
             >
               {data.map((news: any) => {
                 return <Page key={news.url} news={news}></Page>;
